@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dog or Cat Classification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            width: 400px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .custom-file-upload {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 3px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .custom-file-upload:hover {
+            background-color: #0056b3;
+        }
+
+        #uploaded-image {
+            max-width: 100%;
+            margin-top: 20px;
+        }
+        
+        #file-name {
+            text-align: center;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Dog or Cat Classification</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="image-upload" class="custom-file-upload">
+                Upload an Image
+            </label>
+            <input type="file" id="image-upload" name="image" accept="image/*" required>
+            <button type="submit">Classify</button>
+        </form>
+
+        <!-- Add a <p> element to display the filename -->
+        <p id="file-name">No file selected</p>
+
+        <!-- Add an image element to display the uploaded image -->
+    
+    </div>
+
+    <script>
+        // JavaScript to update the filename when a file is selected
+        const fileInput = document.getElementById("image-upload");
+        const fileNameDisplay = document.getElementById("file-name");
+
+        fileInput.addEventListener("change", function () {
+            const fileName = fileInput.files[0] ? fileInput.files[0].name : "No file selected";
+            fileNameDisplay.textContent = "Selected file: " + fileName;
+        });
+    </script>
+</body>
+</html>
